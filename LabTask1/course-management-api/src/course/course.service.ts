@@ -8,6 +8,9 @@ export class CourseService {
 getCourseById(id:string):any{
     return {id:id};
 }
+createCourse():any{
+    return {message:"Course Created"};
+}
 }
 
 
