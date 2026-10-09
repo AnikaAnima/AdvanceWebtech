@@ -17,6 +17,9 @@ updateCourse(id:number):any{
 patchCourse(id:string):any{
     return {id:id};
 }
+deleteCourse(id:string):any{
+    return {id:id}
+}
 }
 
 
