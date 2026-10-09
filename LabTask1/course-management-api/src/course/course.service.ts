@@ -11,6 +11,9 @@ getCourseById(id:string):any{
 createCourse():any{
     return {message:"Course Created"};
 }
+updateCourse(id:number):any{
+    return {id:id}
+}
 }
 
 
