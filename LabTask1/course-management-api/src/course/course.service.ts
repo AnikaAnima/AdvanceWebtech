@@ -12,7 +12,10 @@ createCourse():any{
     return {message:"Course Created"};
 }
 updateCourse(id:number):any{
-    return {id:id}
+    return {id:id};
+}
+patchCourse(id:string):any{
+    return {id:id};
 }
 }
 
