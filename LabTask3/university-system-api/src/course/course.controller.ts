@@ -15,7 +15,10 @@ export class CourseController {
     return this.courseService.getCourseById(id);
   }
 
-  
+  @Post()
+  createCourse(@Body("name") name:string, @Body("code") code:string){
+    return this.courseService.createCourse(name,code);
+  }
 
 
 }
