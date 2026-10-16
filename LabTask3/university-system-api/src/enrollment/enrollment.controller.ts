@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller,Get, Post } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service.js';
 
 @Controller('enrollment')
@@ -9,4 +9,13 @@ export class EnrollmentController {
   getEnrollments(){
     return this.enrollmentService.getEnrollments();
   }
+
+  @Post()
+  enrollStudent(@Body("studentName") studentName:string,
+                @Body("courseId") courseId:string){
+                  return this.enrollmentService.enrollStudent(studentName,courseId);
+                }
+  
+
+  
 }
