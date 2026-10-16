@@ -6,4 +6,10 @@ export class CourseService {
     getAllCourses(){
         return { message: 'All courses fetched', data: [] }
     }
+
+    getCourseById(id: string){
+        return { message: 'Course fetched', id }
+    }
+
+    
 }
