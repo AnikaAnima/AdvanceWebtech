@@ -11,5 +11,10 @@ export class NotificationController {
                     return this.notificationService.sendNotification(studentName,message);
                    }
 
+@Post("check")
+checkEnrollmentAndNotify(@Body("studentName") studentName:string,
+                         @Body("courseId") courseId:string){
+                          return this.notificationService.checkEnrollmentAndNotify(studentName,courseId);
+                         }
 
 }
