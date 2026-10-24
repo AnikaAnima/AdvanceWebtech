@@ -3,14 +3,10 @@ import { EnrollmentService } from '../enrollment/enrollment.service.js';
 
 @Injectable()
 export class NotificationService {
-//commit 10
     constructor(
         @Inject(forwardRef(() => EnrollmentService))
         private readonly enrollmentService: any){}
 
-        //end commit10
-    
-//commit 9
     sendNotification(studentName: string, message: string){
         return{
             message: 'Notification sent successfully',
@@ -20,9 +16,6 @@ export class NotificationService {
     
     }
 
-    //end commit9
-
-    //commit10
     checkEnrollmentAndNotify(studentName: string, courseId: string){
         const enrollments = this.enrollmentService.getEnrollments();
         return{
@@ -33,6 +26,4 @@ export class NotificationService {
 
         }
     }
-
-    //end commit 10
 }

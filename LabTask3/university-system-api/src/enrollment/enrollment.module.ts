@@ -5,21 +5,9 @@ import { CourseModule } from '../course/course.module.js';
 import { NotificationModule } from '../notification/notification.module.js';
 
 @Module({
-
-  //commit6
-  imports:[CourseModule,
-   //end commit6
-   
-   //commit9
-    forwardRef(() => NotificationModule)],
-
-    //end commit 9
+  imports:[CourseModule,forwardRef(() => NotificationModule)],
   controllers: [EnrollmentController],
   providers: [EnrollmentService],
-
-  //commit6
   exports: [EnrollmentService],
-
-  //end commit6
 })
 export class EnrollmentModule {}

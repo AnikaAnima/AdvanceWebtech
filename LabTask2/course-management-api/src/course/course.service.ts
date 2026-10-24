@@ -1,25 +1,52 @@
 import { Injectable } from '@nestjs/common';
+import { CreateCourseDto } from './dtos/create-course.dto.js';
+import { UpdateCourseDto } from './dtos/update-course.dto.js';
 
 @Injectable()
 export class CourseService {
-    getAllCourses():any{
-    return {id:1};
-} 
-getCourseById(id:string):any{
-    return {id:id};
-}
-createCourse():any{
-    return {message:"Course Created"};
-}
-updateCourse(id:number):any{
-    return {id:id};
-}
-patchCourse(id:string):any{
-    return {id:id};
-}
-deleteCourse(id:string):any{
-    return {id:id}
-}
+    getAllCourses() {
+    return {
+      message: 'All courses fetched successfully',
+      data: [],
+    };
+  }
+
+getCourseById(id: string) {
+    return {
+      message: 'Course fetched successfully',
+      id: id,
+    };
+  }
+
+createCourse(dto: CreateCourseDto) {
+    return {
+      message: 'Course created successfully',
+      data: dto,
+    };
+  }
+
+updateCourse(id: string, dto: UpdateCourseDto) {
+    return {
+      message: 'Course updated successfully',
+      id: id,
+      data: dto,
+    };
+  }
+patchCourse(id: string, dto: UpdateCourseDto) {
+    return {
+      message: 'Course patched successfully',
+      id: id,
+      updatedFields: Object.keys(dto),
+    };
+  }
+
+ deleteCourse(id: string) {
+    return {
+      message: 'Course deleted successfully',
+      id: id,
+    };
+  }
+  
 }
 
 
