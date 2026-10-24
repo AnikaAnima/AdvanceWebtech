@@ -1,7 +1,10 @@
-import { Controller, Get, Param, Post, Put, Patch, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Put, Patch, Delete, Body, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { CourseService } from './course.service.js';
 import { CreateCourseDto } from './dtos/create-course.dto.js';
 import { UpdateCourseDto } from './dtos/update-course.dto.js';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { promises as fs } from 'fs';
 
 @Controller('course')
 export class CourseController {
@@ -42,8 +45,44 @@ export class CourseController {
     return this.courseService.deleteCourse(id);
   }
 
+  @Post('upload-profile-pic')
+@UseInterceptors(
+  FileInterceptor('file',{
+
+  }),
+)
+
+async uploadProfilePic(
+  @UploadedFile(
+    new ParseFilePipe({
+      validators:[
+        new MaxFileSizeValidator({
+          maxSize: 1024*1024*7,
+        }),
+        new FileTypeValidator({
+          fileType: /image\/jpeg/,
+
+        }),
+      ],
+
+    }),
+  )
+  file: Express.Multer.File,
+) {
+    const fileName = Date.now() + file.originalname;
+    const path = `./uploads/${fileName}`;
+    await fs.writeFile(path, file.buffer);
+
+    console.log(file.originalname);
+    console.log(file.mimetype);
+    console.log(file.size);
+  }
 
 }
+
+
+
+
 
 
 
