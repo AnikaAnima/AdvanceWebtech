@@ -3,18 +3,31 @@ import { EnrollmentService } from './enrollment.service.js';
 
 @Controller('enrollment')
 export class EnrollmentController {
+
+  
   constructor(private readonly enrollmentService: EnrollmentService) {}
 
-  @Get()
+ 
+
+  //  //Create Course commit5
+
+
+  @Get()//commit6
   getEnrollments(){
     return this.enrollmentService.getEnrollments();
   }
 
-  @Post()
+  //end commit6
+
+
+  //commit7
+  @Post() 
   enrollStudent(@Body("studentName") studentName:string,
                 @Body("courseId") courseId:string){
                   return this.enrollmentService.enrollStudent(studentName,courseId);
                 }
+
+                //end commit7
   
 
   
