@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Products } from './entities/products.entity.js';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto.js';
+import { UpdateProductDto } from './dto/update-product.dto.js';
 
 @Injectable()
 export class ProductsService {
@@ -53,5 +54,27 @@ export class ProductsService {
             throw new BadRequestException(`Product with ${id} is not found`)
         }
     }
+async updateProduct(id: number,product: UpdateProductDto): Promise<{ message: string; data: Products } | string> {
+    try {
+        const pro = await this.productsRepo.findOne({where:{ id: id }});
+        if (pro) {
+            const res = (await this.productsRepo.update(id, product)).affected;
 
+            if (res != null && res > 0) {
+                const updatedProduct = await this.productsRepo.findOne({where: { id: id }});
+                return {
+                    message: `Product with ID ${id} updated successfully`,
+                    data: updatedProduct!
+                };
+            } else {
+                return `Product with ID ${id} failed to be updated`;
+            }
+        } else {
+            return `Product with ID ${id} not found`;
+        }
+
+    } catch {
+        throw new BadRequestException(`Product with ID ${id} failed to update`);
+    }
+}
 }
