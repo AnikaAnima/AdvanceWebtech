@@ -37,4 +37,21 @@ export class ProductsService {
         
     }
 
+    async findOneProduct(id:number): Promise<Products | string> {
+        try{
+            const pro = await this.productsRepo.findOne({
+                where: {
+                    id: id,
+                },
+            });
+            if(!pro){
+                return `Product with ID ${id} is not found`;
+            }
+            return pro;
+
+        }catch{
+            throw new BadRequestException(`Product with ${id} is not found`)
+        }
+    }
+
 }
