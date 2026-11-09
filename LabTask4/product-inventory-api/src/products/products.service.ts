@@ -22,6 +22,19 @@ export class ProductsService {
         }
     }
 
-   
+    async findAllProducts():Promise<{message:string; count:number; data:Products[]}>{
+        try{
+            const pro = await this.productsRepo.find();
+        return{
+            message: 'Products retrieved successfully',
+            count: pro.length,
+            data: pro,
+        };
+
+        }catch{
+            throw new BadRequestException('Products are not found');
+        }
+        
+    }
 
 }

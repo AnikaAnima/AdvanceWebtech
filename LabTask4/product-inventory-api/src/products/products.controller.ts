@@ -13,7 +13,10 @@ export class ProductsController {
     return await this.productsService.createProduct(product);
   }
 
-  
+  @Get()
+  async findProducts(){
+    return await this.productsService.findAllProducts();
+  }
   
 
 
