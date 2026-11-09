@@ -1,7 +1,20 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { ProductsService } from './products.service.js';
+import { CreateProductDto } from './dto/create-product.dto.js';
+import { Products } from './entities/products.entity.js';
+
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
+
+  @Post()
+  async createProduct(@Body() product: CreateProductDto): Promise<{message:string; data:Products}>{
+    return await this.productsService.createProduct(product);
+  }
+
+  
+  
+
+
 }
