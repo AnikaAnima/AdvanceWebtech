@@ -117,6 +117,26 @@ async removeProduct(id: number): Promise<string> {
     }
 }
 
+async findByCategory(category: string): Promise<{ message: string; count: number; data: Products[] } | string> {
+    try {
+        const products = await this.productsRepo.find({where: { category: category }});
+
+        if (products.length > 0) {
+            return {
+                message: `Products found in category ${category}`,
+                count: products.length,
+                data: products
+            };
+        } else {
+            return `No products found in category ${category}`;
+        }
+
+    } catch {
+        throw new BadRequestException(`Failed to find products in category ${category}`
+        );
+    }
+}
+
 
 
 }

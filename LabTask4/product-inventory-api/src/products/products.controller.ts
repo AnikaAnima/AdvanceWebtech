@@ -38,6 +38,11 @@ export class ProductsController {
   async removeProduct(@Param('id', ParseIntPipe) id: number): Promise<string> {
     return await this.productsService.removeProduct(id);
 }
+
+@Get('category/:category')
+async findByCategory(@Param('category') category: string): Promise<{ message: string; count: number; data: Products[] } | string> {
+    return await this.productsService.findByCategory(category);
+}
   
 
 
