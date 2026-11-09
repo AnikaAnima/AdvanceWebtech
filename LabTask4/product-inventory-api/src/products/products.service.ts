@@ -102,6 +102,20 @@ async replaceProduct(id: number,product: UpdateProductDto): Promise<{ message: s
         throw new BadRequestException(`Product with ID ${id} failed to replace`);
     }
 }
+async removeProduct(id: number): Promise<string> {
+    try {
+        const res = (await this.productsRepo.delete(id)).affected;
+
+        if (res != null && res > 0) {
+            return `Product with ID ${id} deleted successfully`;
+        } else {
+            return `Product with ID ${id} not found`;
+        }
+
+    } catch {
+        throw new BadRequestException(`Product with ID ${id} failed to delete`);
+    }
+}
 
 
 
