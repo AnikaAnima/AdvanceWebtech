@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, ParseIntPipe, Put } from '@nestjs/common';
 import { ProductsService } from './products.service.js';
 import { CreateProductDto } from './dto/create-product.dto.js';
 import { Products } from './entities/products.entity.js';
 import { UpdateProductDto } from './dto/update-product.dto.js';
+import { PartialUpdateProductdto } from './dto/partial-update-product.dto.js';
 
 
 @Controller('products')
@@ -24,7 +25,12 @@ export class ProductsController {
     return await this.productsService.findOneProduct(id);
   }
   @Patch(':id')
-  async updateProductPartially(@Body() product:UpdateProductDto,@Param('id') id:number,):Promise<{message:string; data:Products} | string>{
+  async updateProductPartially(@Body() product:PartialUpdateProductdto,@Param('id',ParseIntPipe) id:number,):Promise<{message:string; data:Products} | string>{
+    return await this.productsService.updateProduct(id,product);
+  }
+
+   @Put(':id')
+  async replaceProduct(@Body() product:UpdateProductDto,@Param('id',ParseIntPipe) id:number,):Promise<{message:string; data:Products} | string>{
     return await this.productsService.updateProduct(id,product);
   }
   
